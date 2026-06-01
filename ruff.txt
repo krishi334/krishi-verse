@@ -1,0 +1,10 @@
+git remote add origin https://github.com/krishi334/krishi-verse.git
+git branch -M main
+git push -u origin main
+
+
+
+
+git add .
+git commit -m ""
+git push
