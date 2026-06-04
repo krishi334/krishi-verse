@@ -111,15 +111,17 @@ rather than a traditional developer website.
 # 📬 Contact
 
 ## Krishi Shah
-AI Developer • Full Stack Engineer • Automation Enthusiast
+AI Developer • Full Stack Engineer • Automation
 
 📍 Anand, Gujarat  
-📧 krishishah334@gmail.com  
-🔗www.linkedin.com/in/krishi-shah-030304k
+📧 [Email](mailto:krishishah334@gmail.com)  
+🔗 [Krishi Shah](https://www.linkedin.com/in/krishi-shah-030304k)  
+🔗 [Krishi334](https://github.com/krishi334)
 
-## Optional Direct Email (EmailJS)
 
-The portfolio includes an optional direct-send contact form in the Contact section.
+## Direct Email (EmailJS)
+
+The portfolio includes a direct-send contact form in the Contact section.
 
 1. Copy `.env.example` to `.env`
 2. Add your Web3Forms access key:

@@ -73,10 +73,9 @@ export function DirectContactForm({ recipientEmail }) {
       transition={{ duration: 0.55, ease: "easeOut" }}
       onSubmit={onSubmit}
     >
-      <p className="direct-contact-form__title">Send directly from website (optional)</p>
       <div className="direct-contact-form__grid">
-        <input name="name" value={form.name} onChange={onChange} placeholder="Your name" required />
-        <input name="email" type="email" value={form.email} onChange={onChange} placeholder="Your email" required />
+        <input name="name" value={form.name} onChange={onChange} placeholder="Your name" required /><br />
+        <input name="email" type="email" value={form.email} onChange={onChange} placeholder="Your email" required /><br />
         <input name="subject" value={form.subject} onChange={onChange} placeholder="Subject" required />
         <textarea
           name="message"

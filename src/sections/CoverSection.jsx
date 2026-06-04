@@ -35,7 +35,7 @@ export function CoverSection({ id }) {
           viewport={{ once: true }}
           transition={{ delay: 0.4, duration: 0.9 }}
         >
-          AI Developer | Full Stack Engineer | Automation Enthusiast
+          AI Developer | Full Stack Engineer | Automation
         </motion.p>
         <motion.div
           className="hero-actions"

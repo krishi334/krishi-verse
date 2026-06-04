@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
-import { Bot, Mic2, Sparkles, Workflow } from "lucide-react";
+import { Bot, Layout, Sparkles, Workflow } from "lucide-react";
 import { SectionShell } from "../components/SectionShell";
 
 const points = [
   { icon: Bot, text: "AI automation designed to remove friction from real workflows." },
-  { icon: Mic2, text: "Voice assistant experiments focused on natural, useful interaction." },
+  { icon: Layout, text: "UI/UX design focused on accessible, polished interfaces." },
   { icon: Workflow, text: "Full-stack development that connects thoughtful interfaces with robust systems." },
   { icon: Sparkles, text: "A problem-solving mindset shaped by curiosity, precision, and innovation." },
 ];

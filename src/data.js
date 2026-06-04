@@ -13,9 +13,9 @@ export const profile = {
   email: "krishishah334@gmail.com",
   phone: "+9898810441",
   linkedin: "linkedin.com/in/krishi-shah",
-  title: "AI Developer / Full Stack Engineer / Automation Creator",
+  title: "AI Developer / Full Stack Engineer / Automation",
   objective:
-    "Motivated MCA student with a strong foundation in software development and a passion for building AI-powered and full-stack solutions. Skilled in transforming ideas into practical applications, with hands-on experience in automation, web development, and voice-enabled assistants. Seeking opportunities to apply technical expertise, problem-solving ability, and creativity to contribute to innovative projects.",
+    "Motivated MCA student with a strong foundation in software development and a passion for building AI-powered and full-stack solutions. Skilled in transforming ideas into practical applications, with hands-on experience in automation, web development, and UI/UX design. Seeking opportunities to apply technical expertise, problem-solving ability, and creativity to contribute to innovative projects.",
 };
 
 export const experience = [
@@ -54,7 +54,8 @@ export const projects = [
     demoUrl: "",
     accent: "#c6a77d",
     glow: "rgba(198, 167, 125, 0.34)",
-    backdrop: "radial-gradient(circle at 24% 18%, rgba(247, 243, 238, 0.18), transparent 34%), radial-gradient(circle at 76% 28%, rgba(198, 167, 125, 0.28), transparent 30%), linear-gradient(160deg, rgba(43, 32, 25, 0.96), rgba(16, 12, 10, 0.94))",
+    backdrop:
+      "radial-gradient(circle at 24% 18%, rgba(247, 243, 238, 0.18), transparent 34%), radial-gradient(circle at 76% 28%, rgba(198, 167, 125, 0.28), transparent 30%), linear-gradient(160deg, rgba(43, 32, 25, 0.96), rgba(16, 12, 10, 0.94))",
   },
   {
     title: "Automated Recruitment System",
@@ -208,7 +209,7 @@ export const contactLinks = [
   },
   {
     label: "Email",
-    value: "krishishah334@gmail.com",
+    value: "Email",
     href: "mailto:krishishah334@gmail.com?subject=Inquiry%20from%20Portfolio&body=Hi%20Krishi%2C%0A%0AI%20found%20your%20portfolio%20and%20would%20like%20to%20connect.%20Please%20reply%20with%20more%20details.%0A%0ARegards%2C%0A",
   },
   {
@@ -218,12 +219,12 @@ export const contactLinks = [
   },
   {
     label: "LinkedIn",
-    value: "linkedin.com/in/krishi-shah-030304k",
+    value: "Krishi Shah",
     href: "https://www.linkedin.com/in/krishi-shah-030304k",
   },
   {
     label: "GitHub",
-    value: "github.com/krishi334",
+    value: "Krishi334",
     href: "https://github.com/krishi334",
   },
 ];

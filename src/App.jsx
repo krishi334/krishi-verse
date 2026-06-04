@@ -125,7 +125,7 @@ export default function App() {
           <section id="identity" className="story-node story-node--identity">
             <div className="identity-layout">
               <div className="fragment-cloud">
-                {["AI", "Automation", "Full Stack", "Innovation", "Voice Assistant", "Creativity"].map((word) => (
+                {["AI", "Automation", "Full Stack", "Innovation", "UI/UX"].map((word) => (
                   <motion.span
                     key={word}
                     className="fragment-word"
@@ -188,7 +188,7 @@ export default function App() {
 
           <section id="skills" className="story-node story-node--skills">
             <div className="timeline-copy timeline-copy--skills">
-              <span className="eyebrow">Orbiting Skill System</span>
+              <span className="eyebrow">Skills</span>
             </div>
             <div className="skill-whispers">
               {skillPlanets.map((planet) => (
@@ -210,16 +210,7 @@ export default function App() {
 
           <section id="contact" className="story-node story-node--contact">
             <div className="contact-finale">
-              <span className="eyebrow eyebrow--final">Contact Us</span>
               <h2>Get in touch</h2>
-              <a
-                className="contact-us-cta"
-                href={`mailto:${profile.email}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Contact Us
-              </a>
               <DirectContactForm recipientEmail={profile.email} />
               <div className="contact-links">
                 {contactLinks.map((item) => (
