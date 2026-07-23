@@ -2,7 +2,9 @@ import { Suspense, lazy, useEffect, useState, useRef } from "react";
 import Lenis from "lenis";
 import { motion } from "framer-motion";
 import { ArrowDown, Github, Globe, Linkedin, Mail, MapPin, MoveRight, Phone } from "lucide-react";
-import { contactLinks, experience, narrativeStops, profile, projects, skillPlanets } from "./data";
+import { contactLinks, narrativeStops, skillPlanets } from "./data";
+import { usePortfolioData } from "./hooks/usePortfolioData";
+import { AdminPanel } from "./components/AdminPanel";
 import { CustomCursor } from "./components/CustomCursor";
 import { LuxuryBackground } from "./components/LuxuryBackground";
 import { FloatingContactButton } from "./components/FloatingContactButton";
@@ -38,9 +40,42 @@ function getActiveStop(progress) {
 export default function App() {
   const [progress, setProgress] = useState(0);
   const [activeStop, setActiveStop] = useState("arrival");
+  const [adminPanelOpen, setAdminPanelOpen] = useState(
+    typeof window !== "undefined" && window.location.pathname === "/admin"
+  );
   
   const objectiveRef = useRef(null);
   const [isZoomed, setIsZoomed] = useState(false);
+
+  const { data, loading } = usePortfolioData();
+
+  // Use data from hook, fallback to original if loading
+  const profile = data?.profile || {};
+  const experience = data?.experience || [];
+  const projects = data?.projects || [];
+
+  // Handle admin route
+  useEffect(() => {
+    const handlePopState = () => {
+      setAdminPanelOpen(window.location.pathname === "/admin");
+    };
+    
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  // Handle initial route and route changes
+  useEffect(() => {
+    const isAdminRoute = window.location.pathname === "/admin";
+    setAdminPanelOpen(isAdminRoute);
+  }, []);
+
+  const handleCloseAdmin = () => {
+    setAdminPanelOpen(false);
+    if (window.location.pathname === "/admin") {
+      window.history.pushState(null, "", "/");
+    }
+  };
 
   useEffect(() => {
     const pageTitle = "Krishi Shah | krishishah.dev | AI Developer & Full-Stack Engineer";
@@ -151,10 +186,19 @@ export default function App() {
   };
 
   return (
+    loading ? (
+      <div className="app-shell">
+        <div className="cinematic-world cinematic-world--fallback" aria-hidden="true" />
+      </div>
+    ) : (
     <div className="app-shell">
       <LuxuryBackground progress={progress} />
       <CustomCursor />
       <FloatingContactButton email={profile.email} />
+      <AdminPanel
+        isOpen={adminPanelOpen}
+        onClose={handleCloseAdmin}
+      />
       <Suspense fallback={<div className="cinematic-world cinematic-world--fallback" aria-hidden="true" />}>
         <CinematicWorld progress={progress} />
       </Suspense>
@@ -194,10 +238,6 @@ export default function App() {
                 <span>
                   <Mail size={16} />
                   {profile.email}
-                </span>
-                <span>
-                  <Globe size={16} />
-                  {profile.website.replace("https://", "")}
                 </span>
               </div>
             </div>
@@ -345,5 +385,6 @@ export default function App() {
         </div>
       ) : null}
     </div>
+    )
   );
 }

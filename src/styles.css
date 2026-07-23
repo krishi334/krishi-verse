@@ -1,19 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&display=swap");
 
 :root {
-  --cream: #f7f3ee;
+  --cream: #d3b48e;
   --beige: #e6d5c3;
   --coffee: #8b6f5a;
   --mocha: #6f4e37;
   --espresso: #2b2b2b;
   --gold: #c6a77d;
-  --text: rgba(247, 243, 238, 0.94);
+  --text:  #c09e75;
   --muted: rgba(230, 213, 195, 0.72);
   --line: rgba(230, 213, 195, 0.16);
 }
 
 * {
-  box-sizing: border-box;
+  box-sizing: border-box; 
 }
 
 html {
@@ -589,7 +589,7 @@ a {
   gap: 12px 18px;
   margin-top: 22px;
   max-width: 580px;
-  color: rgba(230, 213, 195, 0.82);
+  color: var(--text);
   font-family: "Cormorant Garamond", serif;
   font-size: clamp(1.1rem, 2.2vw, 1.8rem);
 }
@@ -602,7 +602,7 @@ a {
 }
 
 .hero-meta span:last-child {
-  color: rgba(247, 243, 238, 0.88);
+  color: var(--text);
 }
 
 .hero-float,
@@ -1187,12 +1187,6 @@ a {
 
   .story-node--hero {
     grid-template-columns: 1fr;
-  }
-
-  .hero-stage {
-    width: 100%;
-    justify-self: start;
-    margin-top: 20px;
   }
 
   .scene-wrapper,

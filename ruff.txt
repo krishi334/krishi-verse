@@ -12,3 +12,7 @@ git push
 
 
 PS D:\k portfolio\port> npm run dev
+
+https://www.krishishah.dev/
+https://www.krishishah.dev/admin
+pass - admin123
