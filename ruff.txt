@@ -8,3 +8,7 @@ git push -u origin main
 git add .
 git commit -m ""
 git push
+
+
+
+PS D:\k portfolio\port> npm run dev

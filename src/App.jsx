@@ -1,7 +1,7 @@
 import { Suspense, lazy, useEffect, useState, useRef } from "react";
 import Lenis from "lenis";
 import { motion } from "framer-motion";
-import { ArrowDown, Github, Linkedin, Mail, MapPin, MoveRight, Phone } from "lucide-react";
+import { ArrowDown, Github, Globe, Linkedin, Mail, MapPin, MoveRight, Phone } from "lucide-react";
 import { contactLinks, experience, narrativeStops, profile, projects, skillPlanets } from "./data";
 import { CustomCursor } from "./components/CustomCursor";
 import { LuxuryBackground } from "./components/LuxuryBackground";
@@ -41,6 +41,78 @@ export default function App() {
   
   const objectiveRef = useRef(null);
   const [isZoomed, setIsZoomed] = useState(false);
+
+  useEffect(() => {
+    const pageTitle = "Krishi Shah | krishishah.dev | AI Developer & Full-Stack Engineer";
+    const pageDescription =
+      "krishishah.dev is the official portfolio of Krishi Shah, showcasing AI projects, full-stack work, automation, experience, LinkedIn, GitHub, and direct contact options.";
+
+    document.title = pageTitle;
+
+    const updateMeta = (selector, attribute, value) => {
+      let element = document.head.querySelector(selector);
+
+      if (!element) {
+        element = document.createElement("meta");
+
+        if (selector.includes("property=")) {
+          element.setAttribute("property", selector.match(/property=\"([^\"]+)\"/)?.[1] ?? "");
+        } else if (selector.includes("name=")) {
+          element.setAttribute("name", selector.match(/name=\"([^\"]+)\"/)?.[1] ?? "");
+        }
+
+        document.head.appendChild(element);
+      }
+
+      element.setAttribute(attribute, value);
+    };
+
+    updateMeta('meta[name="description"]', "content", pageDescription);
+    updateMeta('meta[property="og:title"]', "content", pageTitle);
+    updateMeta('meta[property="og:description"]', "content", pageDescription);
+    updateMeta('meta[property="og:url"]', "content", profile.website);
+    updateMeta('meta[property="og:site_name"]', "content", "krishishah.dev");
+    updateMeta('meta[name="twitter:title"]', "content", pageTitle);
+    updateMeta('meta[name="twitter:description"]', "content", pageDescription);
+    updateMeta('meta[name="twitter:image"]', "content", `${profile.website}og-image.svg`);
+
+    const scriptId = "krishishah-structured-data";
+    let script = document.getElementById(scriptId);
+
+    if (!script) {
+      script = document.createElement("script");
+      script.id = scriptId;
+      script.type = "application/ld+json";
+      document.head.appendChild(script);
+    }
+
+    script.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": `${profile.website}#website`,
+          url: profile.website,
+          name: "krishishah.dev",
+          alternateName: "Krishi Shah Portfolio",
+          description: pageDescription,
+          publisher: {
+            "@id": `${profile.website}#person`,
+          },
+        },
+        {
+          "@type": "Person",
+          "@id": `${profile.website}#person`,
+          name: profile.name,
+          alternateName: ["Krishi", "krishishah.dev"],
+          url: profile.website,
+          jobTitle: ["AI Developer", "Full-Stack Engineer", "Automation Specialist"],
+          sameAs: profile.sameAs,
+          knowsAbout: ["AI development", "Full-stack engineering", "Automation", "Web development", "UI/UX design"],
+        },
+      ],
+    });
+  }, []);
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -108,15 +180,24 @@ export default function App() {
         <main className="story-track">
           <section id="arrival" className="story-node story-node--hero">
             <div className="node-copy node-copy--hero">
+              <span className="hero-brand">krishishah.dev</span>
               <h1>{profile.name.toUpperCase()}</h1>
               <a className="hire-me-button" href="/Krishi_CV.pdf" target="_blank" rel="noreferrer">
                 Hire Me
               </a>
               <p>{profile.title}</p>
+              <p className="hero-brand-copy">
+                The official portfolio of Krishi Shah, where AI, full-stack engineering, automation,
+                projects, and social profiles are connected to one name and one domain.
+              </p>
               <div className="hero-meta">
                 <span>
                   <Mail size={16} />
                   {profile.email}
+                </span>
+                <span>
+                  <Globe size={16} />
+                  {profile.website.replace("https://", "")}
                 </span>
               </div>
             </div>
@@ -220,6 +301,7 @@ export default function App() {
                     target={item.href.startsWith("http") ? "_blank" : undefined}
                     rel="noreferrer"
                   >
+                    {item.label === "Website" ? <Globe size={16} /> : null}
                     {item.label === "Location" ? <MapPin size={16} /> : null}
                     {item.label === "Email" ? <Mail size={16} /> : null}
                     {item.label === "Phone" ? <Phone size={16} /> : null}

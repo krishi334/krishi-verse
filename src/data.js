@@ -9,10 +9,15 @@ export const narrativeStops = [
 
 export const profile = {
   name: "Krishi Shah",
+  website: "https://krishishah.dev/",
   location: "Anand",
   email: "krishishah334@gmail.com",
   phone: "+9898810441",
   linkedin: "linkedin.com/in/krishi-shah",
+  sameAs: [
+    "https://www.linkedin.com/in/krishi-shah-030304k",
+    "https://github.com/krishi334",
+  ],
   title: "AI Developer / Full Stack Engineer / Automation",
   objective:
     "Motivated MCA student with a strong foundation in software development and a passion for building AI-powered and full-stack solutions. Skilled in transforming ideas into practical applications, with hands-on experience in automation, web development, and UI/UX design. Seeking opportunities to apply technical expertise, problem-solving ability, and creativity to contribute to innovative projects.",
@@ -202,6 +207,11 @@ export const education = [
 ];
 
 export const contactLinks = [
+  {
+    label: "Website",
+    value: "krishishah.dev",
+    href: "https://krishishah.dev/",
+  },
   {
     label: "Location",
     value: "Anand",
