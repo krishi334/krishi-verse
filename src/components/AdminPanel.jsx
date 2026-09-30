@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { usePortfolioData } from "../hooks/usePortfolioData";
 import { X, Plus, Edit2, Trash2, Save, LogOut } from "lucide-react";
 import "./AdminPanel.css";
@@ -11,6 +11,8 @@ export function AdminPanel({ isOpen, onClose }) {
   const [activeTab, setActiveTab] = useState("profile");
   const [editingIndex, setEditingIndex] = useState(null);
   const [formData, setFormData] = useState({});
+  const cvFileInputRef = useRef(null);
+  const projectImageInputRef = useRef(null);
 
   const {
     data,
@@ -52,6 +54,51 @@ export function AdminPanel({ isOpen, onClose }) {
     updateProfile(formData);
     setFormData({});
     setEditingIndex(null);
+  };
+
+  const fileToDataUrl = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = () => reject(new Error("Failed to read file"));
+      reader.readAsDataURL(file);
+    });
+
+  const handleCvUpload = async (event) => {
+    const file = event.target.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    try {
+      const dataUrl = await fileToDataUrl(file);
+      handleProfileChange("cvUrl", dataUrl);
+    } catch {
+      alert("Unable to upload CV. Please try again.");
+    } finally {
+      event.target.value = "";
+    }
+  };
+
+  const handleProjectImageUpload = async (event) => {
+    const file = event.target.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    try {
+      const dataUrl = await fileToDataUrl(file);
+      setFormData((prev) => ({
+        ...prev,
+        image: dataUrl,
+      }));
+    } catch {
+      alert("Unable to upload image. Please try again.");
+    } finally {
+      event.target.value = "";
+    }
   };
 
   // Experience handlers
@@ -188,6 +235,9 @@ export function AdminPanel({ isOpen, onClose }) {
                         <p>
                           <strong>Location:</strong> {data.profile.location}
                         </p>
+                        <p>
+                          <strong>CV URL:</strong> {data.profile.cvUrl}
+                        </p>
                       </div>
                       <button
                         className="btn-primary"
@@ -241,6 +291,31 @@ export function AdminPanel({ isOpen, onClose }) {
                           handleProfileChange("location", e.target.value)
                         }
                       />
+                      <input
+                        type="text"
+                        placeholder="CV URL (example: /Krishi_CV.pdf)"
+                        value={formData.cvUrl || ""}
+                        onChange={(e) =>
+                          handleProfileChange("cvUrl", e.target.value)
+                        }
+                      />
+                      <div className="upload-actions">
+                        <input
+                          ref={cvFileInputRef}
+                          type="file"
+                          accept="application/pdf"
+                          onChange={handleCvUpload}
+                          hidden
+                        />
+                        <button
+                          type="button"
+                          className="btn-secondary"
+                          onClick={() => cvFileInputRef.current?.click()}
+                        >
+                          Upload CV PDF
+                        </button>
+                        <small className="upload-hint">Uploaded PDF is saved in browser storage.</small>
+                      </div>
                       <textarea
                         placeholder="Objective"
                         value={formData.objective || ""}
@@ -468,6 +543,23 @@ export function AdminPanel({ isOpen, onClose }) {
                           }))
                         }
                       />
+                      <div className="upload-actions">
+                        <input
+                          ref={projectImageInputRef}
+                          type="file"
+                          accept="image/*"
+                          onChange={handleProjectImageUpload}
+                          hidden
+                        />
+                        <button
+                          type="button"
+                          className="btn-secondary"
+                          onClick={() => projectImageInputRef.current?.click()}
+                        >
+                          Upload Project Image
+                        </button>
+                        <small className="upload-hint">Use optimized images for faster loading.</small>
+                      </div>
                       <input
                         type="text"
                         placeholder="GitHub URL"

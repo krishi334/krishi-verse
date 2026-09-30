@@ -10,6 +10,7 @@ export const narrativeStops = [
 export const profile = {
   name: "Krishi Shah",
   website: "https://krishishah.dev/",
+  cvUrl: "/Krishi_CV.pdf",
   location: "Anand",
   email: "krishishah334@gmail.com",
   phone: "+9898810441",
@@ -50,53 +51,176 @@ export const experience = [
 
 export const projects = [
   {
+    projectId: "personal-voice-assistant",
     title: "Personal Voice Assistant",
     description:
       "A smart voice assistant with wake-word detection, AI-powered conversations, app control, and smooth voice-first task automation for daily workflows.",
     technologies: ["Python", "OpenAI GPT", "SpeechRecognition", "Pyttsx3"],
     image: "/projects/voice-assistant-reference-1.png",
+    imageAlt: "Voice assistant themed project visual for Personal Voice Assistant",
     githubUrl: "https://github.com/krishi334/AI-Voice-Assistant",
     demoUrl: "",
     accent: "#c6a77d",
     glow: "rgba(198, 167, 125, 0.34)",
     backdrop:
       "radial-gradient(circle at 24% 18%, rgba(247, 243, 238, 0.18), transparent 34%), radial-gradient(circle at 76% 28%, rgba(198, 167, 125, 0.28), transparent 30%), linear-gradient(160deg, rgba(43, 32, 25, 0.96), rgba(16, 12, 10, 0.94))",
+    overview:
+      "Built to make hands-free interaction feel practical in daily work, this assistant combines wake-word activation, conversational AI, and local app control.",
+    whyBuilt:
+      "The goal was to reduce repetitive clicking and typing during routine tasks by turning the laptop into a voice-first workspace.",
+    whatItUses:
+      "Python coordinates the automation flow, OpenAI GPT handles intelligent responses, SpeechRecognition listens for commands, and Pyttsx3 speaks back to the user.",
+    highlights: [
+      "Wake-word flow for instant activation",
+      "Conversational responses with AI context",
+      "Voice-first automation for faster daily tasks",
+    ],
+    blog: {
+      heading: "1. Personal Voice Assistant",
+      intro: [
+        "Personal Voice Assistant is a Windows-based smart voice assistant developed to provide natural voice interaction and task automation. The system uses wake-word detection to activate the assistant and allows users to interact through both voice and text input.",
+        "The assistant can understand user queries and respond using GPT-powered intelligence. It can perform everyday tasks such as answering questions, playing music, opening applications, searching the web, and automating routine activities. Supporting both speech and text input also makes the system more flexible and accessible for different types of users.",
+      ],
+      keyFeatures: [
+        "Wake-word detection",
+        "Natural voice interaction",
+        "Speech and text input",
+        "GPT-powered question answering",
+        "Music playback",
+        "Application launching",
+        "Web searching",
+        "Routine task automation",
+      ],
+      tools: "Python, OpenAI GPT, SpeechRecognition, Pyttsx3",
+    },
   },
   {
+    projectId: "automated-recruitment-system",
     title: "Automated Recruitment System",
     description:
       "An AI recruitment workflow that reads resumes, runs guided screening logic, and surfaces better candidate matches with less manual effort.",
     technologies: ["Python", "Groq API", "Firebase"],
     image: "/projects/recruitment-system-reference-1.png",
+    imageAlt: "Recruitment system dashboard style visual for Automated Recruitment System",
     githubUrl: "https://github.com/krishi334/Hireverse",
     demoUrl: "",
     accent: "#dcc7aa",
     glow: "rgba(220, 199, 170, 0.3)",
     backdrop: "radial-gradient(circle at 18% 24%, rgba(220, 199, 170, 0.2), transparent 32%), radial-gradient(circle at 82% 22%, rgba(139, 111, 90, 0.22), transparent 30%), linear-gradient(160deg, rgba(26, 19, 15, 0.96), rgba(12, 9, 8, 0.94))",
+    overview:
+      "This project streamlines candidate screening by combining structured resume review with AI-assisted ranking and storage.",
+    whyBuilt:
+      "It was built to cut down manual hiring effort and help recruiters compare applicants more quickly and consistently.",
+    whatItUses:
+      "Python orchestrates the workflow, Groq API adds AI reasoning for screening, and Firebase stores the data and results.",
+    highlights: [
+      "Resume ingestion and screening flow",
+      "AI-assisted candidate evaluation",
+      "Centralized data storage for review history",
+    ],
+    blog: {
+      heading: "2. Automated Recruitment System",
+      intro: [
+        "Automated Recruitment System is an AI-powered application designed to simplify and automate important parts of the recruitment process. The system focuses on reducing the amount of manual effort required for resume screening and candidate shortlisting.",
+        "The application analyzes candidate resumes and matches them against company policies and requirements. It also includes AI-driven interview simulations, allowing candidates to go through an intelligent interview experience as part of the recruitment workflow.",
+        "By combining resume analysis, requirement matching, interview simulation, and intelligent shortlisting, the system aims to make the recruitment process more structured and efficient.",
+      ],
+      keyFeatures: [
+        "AI-based resume analysis",
+        "Candidate and requirement matching",
+        "Company policy-based screening",
+        "AI-driven interview simulation",
+        "Intelligent candidate shortlisting",
+        "Automated recruitment workflow",
+      ],
+      tools: "Python, Groq API, Firebase",
+    },
   },
   {
+    projectId: "automated-timetable-management-system",
     title: "Automated Timetable Management System",
     description:
       "A scheduling system that turns faculty availability, subject constraints, and classroom demand into structured, conflict-aware timetables.",
     technologies: ["PHP", "MySQL", "HTML", "CSS", "JavaScript", "Bootstrap"],
     image: "/projects/timetable-system-reference-1.png",
+    imageAlt: "Timetable management system visual for Automated Timetable Management System",
     githubUrl: "https://github.com/krishi334",
     demoUrl: "",
     accent: "#8b6f5a",
     glow: "rgba(139, 111, 90, 0.3)",
     backdrop: "radial-gradient(circle at 28% 16%, rgba(198, 167, 125, 0.16), transparent 34%), radial-gradient(circle at 72% 74%, rgba(247, 243, 238, 0.12), transparent 30%), linear-gradient(155deg, rgba(24, 19, 16, 0.96), rgba(11, 9, 8, 0.94))",
+    overview:
+      "The system automates timetable creation so class schedules can be assembled with fewer conflicts and less manual editing.",
+    whyBuilt:
+      "It was created to handle the repetitive planning work involved in balancing teachers, rooms, subjects, and time slots.",
+    whatItUses:
+      "PHP powers the server logic, MySQL stores timetable data, and Bootstrap plus vanilla JavaScript shape the interface and interactions.",
+    highlights: [
+      "Constraint-aware timetable generation",
+      "Faculty and room availability management",
+      "Practical web UI for schedule review",
+    ],
+    blog: {
+      heading: "3. Automated Timetable Management System",
+      intro: [
+        "Automated Timetable Management System is a dynamic web application designed to automatically generate and optimize academic timetables for schools and colleges.",
+        "The system considers important scheduling constraints such as class schedules, faculty availability, and subject requirements while generating timetables. The objective is to reduce scheduling conflicts and make timetable management easier for educational institutions.",
+        "Instead of creating schedules manually, the application helps organize classes and faculty availability into a structured timetable, improving time management for both students and teachers.",
+      ],
+      keyFeatures: [
+        "Automatic timetable generation",
+        "Timetable optimization",
+        "Faculty availability management",
+        "Class schedule management",
+        "Subject-based scheduling",
+        "Conflict minimization",
+        "Web-based timetable management",
+      ],
+      tools: "PHP, MySQL, HTML, CSS, JavaScript, Bootstrap",
+    },
   },
   {
+    projectId: "idea-innovator-investor-platform",
     title: "Idea-Innovator-Investor Platform",
     description:
       "A collaboration platform for matching ideas with capital through polished pitches, document exchange, and built-in communication touchpoints.",
     technologies: ["PHP", "PHPMailer", "MySQL", "HTML", "CSS", "JavaScript", "Bootstrap"],
     image: "/projects/idea-inoverter-refrence-1.png",
+    imageAlt: "Idea, innovator, and investor platform visual for collaboration and pitching",
     githubUrl: "https://github.com/krishi334",
     demoUrl: "",
     accent: "#f7f3ee",
     glow: "rgba(247, 243, 238, 0.18)",
     backdrop: "radial-gradient(circle at 32% 22%, rgba(247, 243, 238, 0.18), transparent 34%), radial-gradient(circle at 76% 32%, rgba(198, 167, 125, 0.22), transparent 28%), linear-gradient(160deg, rgba(20, 16, 14, 0.96), rgba(10, 8, 7, 0.95))",
+    overview:
+      "This platform connects idea owners with investors and supports the pitch, review, and communication flow in one place.",
+    whyBuilt:
+      "It was designed to make early-stage collaboration feel more organized and easier to track than scattered chats and documents.",
+    whatItUses:
+      "PHP handles application logic, PHPMailer supports email flows, MySQL stores records, and the front end uses Bootstrap, HTML, CSS, and JavaScript.",
+    highlights: [
+      "Pitch submission and document exchange",
+      "Email-based communication touchpoints",
+      "Investor and idea matching workflow",
+    ],
+    blog: {
+      heading: "4. Idea-Innovator-Investor Platform",
+      intro: [
+        "Idea-Innovator-Investor Platform is a web platform designed to connect innovative startups and idea creators with potential investors. The platform provides innovators with a structured way to present their ideas and project information to investors.",
+        "Users can share their startup ideas through documents, presentations, and detailed project information. The platform also supports communication between innovators and investors through investor notifications, document sharing, and secure email integration.",
+        "The overall goal of the platform is to create a structured digital environment where innovative ideas can be presented, explored, and connected with potential funding opportunities.",
+      ],
+      keyFeatures: [
+        "Startup and investor connection",
+        "Idea/project presentation",
+        "Document and presentation sharing",
+        "Detailed project information",
+        "Investor notifications",
+        "Secure email integration",
+        "Communication support for collaboration",
+      ],
+      tools: "PHP, PHPMailer, MySQL, HTML, CSS, JavaScript, Bootstrap",
+    },
   },
 ];
 

@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ArrowUpRight, Github } from "lucide-react";
+import { ArrowUpRight, Info } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function ProjectScene({ project, index, setArticleRef, isActive }) {
+function ProjectScene({ project, index, setArticleRef, isActive, onOpenDetails }) {
   const cardRef = useRef(null);
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
@@ -69,16 +69,14 @@ function ProjectScene({ project, index, setArticleRef, isActive }) {
             ))}
           </div>
           <div className="project-cinematic__actions">
-            {index < 2 ? (
-              <button
-                className="project-cinematic__button project-cinematic__button--primary"
-                type="button"
-                onClick={() => window.open(project.githubUrl, "_blank")}
-              >
-                <Github size={16} />
-                View Code
-              </button>
-            ) : null}
+            <button
+              className="project-cinematic__button project-cinematic__button--primary"
+              type="button"
+              onClick={() => onOpenDetails?.(project)}
+            >
+              <Info size={16} />
+              Project Details
+            </button>
             {project.demoUrl ? (
               <a
                 className="project-cinematic__button"
@@ -135,11 +133,11 @@ function ProjectScene({ project, index, setArticleRef, isActive }) {
   );
 }
 
-export function ProjectShowcase({ projects }) {
+export function ProjectShowcase({ projects, onOpenProject }) {
   const sectionRef = useRef(null);
   const articleRefs = useRef([]);
   const [activeIndex, setActiveIndex] = useState(0);
-  const activeProject = projects[activeIndex] ?? projects[0];
+  const showcaseProject = projects[activeIndex] ?? projects[0];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -211,8 +209,8 @@ export function ProjectShowcase({ projects }) {
       ref={sectionRef}
       className="project-showcase"
       style={{
-        "--showcase-glow": activeProject?.glow,
-        "--showcase-accent": activeProject?.accent,
+        "--showcase-glow": showcaseProject?.glow,
+        "--showcase-accent": showcaseProject?.accent,
       }}
     >
       <div className="project-showcase__ambient" aria-hidden="true" />
@@ -224,6 +222,7 @@ export function ProjectShowcase({ projects }) {
             index={index}
             setArticleRef={setArticleRef}
             isActive={activeIndex === index}
+            onOpenDetails={onOpenProject}
           />
         ))}
       </div>

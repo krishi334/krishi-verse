@@ -10,6 +10,7 @@ import { LuxuryBackground } from "./components/LuxuryBackground";
 import { FloatingContactButton } from "./components/FloatingContactButton";
 import { DirectContactForm } from "./components/DirectContactForm";
 import { ProjectShowcase } from "./components/ProjectShowcase";
+import { ProjectDetailsPage } from "./components/ProjectDetailsPage";
 const CinematicWorld = lazy(() =>
   import("./components/CinematicWorld").then((module) => ({ default: module.CinematicWorld })),
 );
@@ -37,12 +38,26 @@ function getActiveStop(progress) {
   return current;
 }
 
+function slugifyProjectTitle(title) {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+function getPathname() {
+  if (typeof window === "undefined") {
+    return "/";
+  }
+
+  return window.location.pathname;
+}
+
 export default function App() {
   const [progress, setProgress] = useState(0);
   const [activeStop, setActiveStop] = useState("arrival");
-  const [adminPanelOpen, setAdminPanelOpen] = useState(
-    typeof window !== "undefined" && window.location.pathname === "/admin"
-  );
+  const [currentPath, setCurrentPath] = useState(getPathname);
+  const [adminPanelOpen, setAdminPanelOpen] = useState(currentPath === "/admin");
   
   const objectiveRef = useRef(null);
   const [isZoomed, setIsZoomed] = useState(false);
@@ -54,27 +69,45 @@ export default function App() {
   const experience = data?.experience || [];
   const projects = data?.projects || [];
 
+  const isProjectRoute = currentPath.startsWith("/project/");
+  const projectSlug = decodeURIComponent(currentPath.replace("/project/", ""));
+  const selectedProject = projects.find((item) => slugifyProjectTitle(item.title) === projectSlug);
+
   // Handle admin route
   useEffect(() => {
     const handlePopState = () => {
-      setAdminPanelOpen(window.location.pathname === "/admin");
+      setCurrentPath(getPathname());
     };
     
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
 
-  // Handle initial route and route changes
+  // Keep route-based UI state in sync
   useEffect(() => {
-    const isAdminRoute = window.location.pathname === "/admin";
-    setAdminPanelOpen(isAdminRoute);
-  }, []);
+    setAdminPanelOpen(currentPath === "/admin");
+  }, [currentPath]);
 
   const handleCloseAdmin = () => {
     setAdminPanelOpen(false);
-    if (window.location.pathname === "/admin") {
+    if (getPathname() === "/admin") {
       window.history.pushState(null, "", "/");
+      setCurrentPath("/");
     }
+  };
+
+  const openProjectDetailsPage = (project) => {
+    const slug = slugifyProjectTitle(project.title);
+    const nextPath = `/project/${slug}`;
+    window.history.pushState(null, "", nextPath);
+    setCurrentPath(nextPath);
+    window.scrollTo({ top: 0, behavior: "auto" });
+  };
+
+  const closeProjectDetailsPage = () => {
+    window.history.pushState(null, "", "/");
+    setCurrentPath("/");
+    window.scrollTo({ top: 0, behavior: "auto" });
   };
 
   useEffect(() => {
@@ -203,8 +236,11 @@ export default function App() {
         <CinematicWorld progress={progress} />
       </Suspense>
 
-      
+      {isProjectRoute ? (
+        <ProjectDetailsPage project={selectedProject} onBack={closeProjectDetailsPage} />
+      ) : null}
 
+      {!isProjectRoute ? (
       <div className="experience-shell">
         <div className="nav-beam" aria-label="Scene navigation">
           <div className="nav-beam__line" />
@@ -226,7 +262,7 @@ export default function App() {
             <div className="node-copy node-copy--hero">
               <span className="hero-brand">krishishah.dev</span>
               <h1>{profile.name.toUpperCase()}</h1>
-              <a className="hire-me-button" href="/Krishi_CV.pdf" target="_blank" rel="noreferrer">
+              <a className="hire-me-button" href={profile.cvUrl || "/Krishi_CV.pdf"} target="_blank" rel="noreferrer">
                 Hire Me
               </a>
               <p>{profile.title}</p>
@@ -304,7 +340,7 @@ export default function App() {
             <div className="timeline-copy timeline-copy--projects">
               <span className="eyebrow">Project Worlds</span>
             </div>
-            <ProjectShowcase projects={projects} />
+            <ProjectShowcase projects={projects} onOpenProject={openProjectDetailsPage} />
           </section>
 
           <section id="skills" className="story-node story-node--skills">
@@ -356,7 +392,8 @@ export default function App() {
           </section>
         </main>
       </div>
-      {isZoomed ? (
+      ) : null}
+      {!isProjectRoute && isZoomed ? (
         <div
           className="objective-overlay"
           role="dialog"

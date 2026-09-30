@@ -130,6 +130,25 @@ The portfolio includes a direct-send contact form in the Contact section.
 
 If the access key is not configured, users can still contact you through the mail app CTA (`mailto:`) with your email prefilled.
 
+## Cross-Device Admin Sync (Firebase)
+
+Admin edits (profile, projects, uploaded CV URL/images) can sync automatically across devices and browsers.
+
+1. Create a Firebase project and enable Realtime Database.
+2. Copy `.env.example` to `.env`.
+3. Fill these values from Firebase project settings:
+	- `VITE_FIREBASE_API_KEY`
+	- `VITE_FIREBASE_AUTH_DOMAIN`
+	- `VITE_FIREBASE_DATABASE_URL`
+	- `VITE_FIREBASE_PROJECT_ID`
+	- `VITE_FIREBASE_STORAGE_BUCKET`
+	- `VITE_FIREBASE_MESSAGING_SENDER_ID`
+	- `VITE_FIREBASE_APP_ID`
+4. Keep or change `VITE_PORTFOLIO_SYNC_KEY` to control which site instances share the same cloud record.
+5. Restart the dev server.
+
+When Firebase env vars are missing, the app automatically falls back to local browser storage.
+
 ---
 
 # 🪐 “Building experiences beyond traditional portfolios.”
